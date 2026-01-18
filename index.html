@@ -1,230 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>See A Billion</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>See A Billion</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #000;
-      --fg: #eaeaea;
-      --accent: #00f5c4;
-      --muted: rgba(255,255,255,0.55);
-    }
+<style>
+:root {
+  --neon: #00ffc3;
+  --bg: #000;
+  --panel: #0b0b0b;
+  --muted: rgba(255,255,255,0.65);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #0b0b0b, #000);
-      color: var(--fg);
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont;
-      overflow-x: hidden;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top, #050505, #000);
+  color: #fff;
+  overflow-x: hidden;
+}
 
-    body {
-      min-height: 100vh;
-    }
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 
-    .container {
-      max-width: 760px;
-      margin: auto;
-      padding: 90px 22px;
-      text-align: center;
-    }
+.hero-content {
+  max-width: 900px;
+  z-index: 2;
+}
 
-    /* ---------- HERO ---------- */
+#hero h1 {
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
 
-    .hero {
-      margin-bottom: 90px;
-    }
+.frequency {
+  margin-top: 24px;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  line-height: 2;
+}
 
-    .symbol {
-      width: 180px;
-      height: 160px;
-      margin: 0 auto 40px;
-      border: 2px solid var(--accent);
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      box-shadow: 0 0 45px rgba(0,245,196,0.45);
-      animation: pulse 4.5s ease-in-out infinite;
-    }
+.cta {
+  margin-top: 36px;
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 1rem;
+  background: var(--neon);
+  color: #000;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 0 30px rgba(0,255,195,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.85;
-      }
-      50% {
-        transform: scale(1.06);
-        opacity: 1;
-      }
-    }
+.cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 45px rgba(0,255,195,0.65);
+}
 
-    .brand {
-      font-size: 2.7rem;
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      margin: 0;
-    }
+/* ===== ENERGY PYRAMID ===== */
+.pyramid {
+  position: absolute;
+  bottom: 6%;
+  width: 260px;
+  height: 230px;
+  opacity: 0.85;
+}
 
-    .frequency {
-      margin-top: 22px;
-      font-size: 1.05rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.65;
-      line-height: 1.9;
-    }
+.apex {
+  animation: glow 3s infinite ease-in-out;
+}
 
-    /* ---------- DIVIDER ---------- */
+@keyframes glow {
+  0%,100% { filter: drop-shadow(0 0 12px var(--neon)); }
+  50% { filter: drop-shadow(0 0 34px var(--neon)); }
+}
 
-    .divider {
-      height: 1px;
-      width: 60%;
-      margin: 80px auto;
-      background: linear-gradient(to right, transparent, var(--accent), transparent);
-      opacity: 0.3;
-    }
+/* ===== SECTIONS ===== */
+section {
+  padding: 90px 20px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
 
-    /* ---------- SECTIONS ---------- */
+section:not(#hero) {
+  background: linear-gradient(to bottom, transparent, var(--panel), transparent);
+}
 
-    section {
-      margin: 70px 0;
-    }
+h2 {
+  font-size: 1.9rem;
+  margin-bottom: 26px;
+  letter-spacing: -0.02em;
+}
 
-    h2 {
-      font-size: 0.9rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 26px;
-    }
+ul.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+ul.links li {
+  margin: 14px 0;
+}
 
-    li {
-      font-size: 1.1rem;
-      margin: 12px 0;
-      opacity: 0.85;
-    }
+ul.links a {
+  color: var(--neon);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
 
-    /* ---------- PLACEHOLDER BLOCKS (for future video/content) ---------- */
+ul.links a:hover {
+  text-decoration: underline;
+}
 
-    .placeholder {
-      margin: 40px auto 0;
-      width: 100%;
-      height: 180px;
-      border: 1px dashed rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      opacity: 0.35;
-      border-radius: 10px;
-    }
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  width: 60%;
+  margin: 80px auto;
+  background: linear-gradient(to right, transparent, var(--neon), transparent);
+  opacity: 0.3;
+}
 
-    /* ---------- FOOTER ---------- */
-
-    .coming {
-      margin-top: 100px;
-      font-size: 0.85rem;
-      opacity: 0.4;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* ---------- FADE-IN ---------- */
-
-    .fade {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .fade.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-  </style>
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  background: #040404;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <h1>See A Billion</h1>
 
-    <!-- HERO -->
-    <div class="hero fade">
-      <div class="symbol"></div>
-      <h1 class="brand">See A Billion</h1>
-      <p class="frequency">
-        See A Billion is a frequency.<br>
-        A state of mind.<br>
-        A culture.
-      </p>
-    </div>
+    <p class="frequency">
+      See A Billion is a frequency.<br>
+      A state of mind.<br>
+      A culture.
+    </p>
 
-    <div class="divider fade"></div>
-
-    <!-- BOOKS -->
-    <section class="fade">
-      <h2>Books</h2>
-      <ul>
-        <li>Black Culture Guide (Urban Edition)</li>
-        <li>Global Culture Guide</li>
-        <li>The Little Drummer</li>
-      </ul>
-
-      <div class="placeholder">
-        Video / Visual content coming here
-      </div>
-    </section>
-
-    <div class="divider fade"></div>
-
-    <!-- CLOTHING -->
-    <section class="fade">
-      <h2>Clothing</h2>
-      <ul>
-        <li>SeeABillion</li>
-        <li>I Luv Me</li>
-        <li>Tribe Up</li>
-      </ul>
-
-      <div class="placeholder">
-        Product visuals / store embed later
-      </div>
-    </section>
-
-    <p class="coming fade">More unfolding</p>
-
+    <a class="cta" href="#alchemy">Enter</a>
   </div>
 
-  <!-- SCROLL FADE SCRIPT -->
-  <script>
-    const fades = document.querySelectorAll('.fade');
+  <!-- ENERGY PYRAMID -->
+  <div class="pyramid">
+    <svg viewBox="0 0 200 180" width="100%" height="100%">
+      <polygon points="100,10 10,170 190,170"
+        fill="none"
+        stroke="#00ffc3"
+        stroke-width="2"/>
+      <circle class="apex" cx="100" cy="12" r="6" fill="#00ffc3"/>
+    </svg>
+  </div>
+</section>
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.15 });
+<div class="divider"></div>
 
-    fades.forEach(el => observer.observe(el));
-  </script>
+<!-- ALCHEMYSCORE -->
+<section id="alchemy">
+  <h2>🧠 AlchemyScore</h2>
+  <ul class="links">
+    <li>
+      <a href="https://seeavision.space/" target="_blank" rel="noopener">
+        The AlchemyScore App & Project
+      </a>
+    </li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<!-- MUSIC -->
+<section id="music">
+  <h2>🎵 Music</h2>
+  <ul class="links">
+    <li>
+      <a href="https://seeabillionmusic.com" target="_blank" rel="noopener">
+        seeabillionmusic.com
+      </a>
+    </li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<!-- BOOKS -->
+<section id="books">
+  <h2>📚 Books by D.M.B</h2>
+  <ul class="links">
+    <li><a href="https://a.co/d/4s0iy3q" target="_blank" rel="noopener">Black Culture Guide (Urban Edition)</a></li>
+    <li><a href="https://a.co/d/7DBelCu" target="_blank" rel="noopener">Global Culture Guide</a></li>
+    <li><a href="https://a.co/d/3lcQLhP" target="_blank" rel="noopener">The Little Drummer</a></li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLOTHING -->
+<section id="clothing">
+  <h2>👕 Clothing</h2>
+  <ul class="links">
+    <li>
+      <a href="https://seebillions.myspreadshop.com/" target="_blank" rel="noopener">
+        SeeABillioN / I Luv Me / Tribe Up
+      </a>
+    </li>
+  </ul>
+</section>
+
+<footer>
+  Created by D.M.B SeeAVision  © 2026<br>
+
+</footer>
 
 </body>
 </html>
