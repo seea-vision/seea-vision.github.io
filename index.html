@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeeABillion</title>
+
+<style>
+:root {
+  --neon: #00ffc3;
+  --bg: #000;
+  --panel: #0b0b0b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top, #050505, #000);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content centre;
+  text-align: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at centre, rgba(0,255,195,0.08), transparent 70%),
+    linear-gradient(to bottom, #020202, #000);
+}
+
+.hero-content {
+  max-width: 900px;
+  z-index: 2;
+}
+
+#hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+#hero p {
+  font-size: 1.25rem;
+  margin-top: 20px;
+  line-height: 1.7;
+  color: #e6e6e6;
+}
+
+#hero a {
+  margin-top: 35px;
+  display: inline-block;
+  padding: 14px 30px;
+  font-size: 1rem;
+  background: var(--neon);
+  color: #000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 25px rgba(0,255,195,0.4);
+}
+
+/* ===== ENERGY PYRAMID ===== */
+.pyramid {
+  position: absolute;
+  bottom: 5%;
+  width: 260px;
+  height: 230px;
+  opacity: 0.85;
+}
+
+.pyramid svg {
+  width: 100%;
+  height: 100%;
+}
+
+.apex {
+  animation: glow 3s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0%,100% { filter: drop-shadow(0 0 10px var(--neon)); }
+  50% { filter: drop-shadow(0 0 30px var(--neon)); }
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section:not(#hero) {
+  background: linear-gradient(to bottom, transparent, var(--panel), transparent);
+}
+
+h2 {
+  font-size: 2.1rem;
+  margin-bottom: 20px;
+}
+
+ul.links {
+  list-style: none;
+  padding: 0;
+}
+
+ul.links li {
+  margin-bottom: 12px;
+}
+
+ul.links a {
+  color: var(--neon);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  background: #050505;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <h1>Chicago Didn’t Collapse. It Evolved.</h1>
+    <p>
+      The city morphed into a harmonic system — powered by a central energy pyramid.<br><br>
+      At the apex: a living triangle, drawing from the sun and the charged atmosphere itself.<br><br>
+      Energy is no longer extracted. It is tuned.<br>
+      Sound. Movement. Culture. Intention.<br><br>
+      This is <strong>See a Billion</strong>.
+    </p>
+    <a href="#about">Learn More</a>
+  </div>
+
+  <!-- ENERGY PYRAMID -->
+  <div class="pyramid">
+    <svg viewBox="0 0 200 180">
+      <polygon points="100,10 10,170 190,170"
+        fill="none"
+        stroke="#00ffc3"
+        stroke-width="2"/>
+      <circle class="apex" cx="100" cy="12" r="6" fill="#00ffc3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT SEE A BILLION -->
+<section id="about">
+  <h2>🌀 What Is See a Billion?</h2>
+  <p>
+    See a Billion is a state of mind and a frequency — an invitation to tune into the hidden wealth and potential within ourselves and our surroundings. This hub links our music, books, fashion and apps, inspiring collaboration and creativity without comparison or judgment.
+  </p>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <h2>🎵 Music</h2>
+  <ul class="links">
+    <li><a href="https://seeabillionmusic.com" target="_blank">seeabillionmusic.com</a></li>
+  </ul>
+</section>
+
+<!-- BOOKS -->
+<section id="books">
+  <h2>📚 Books by D.M.B</h2>
+  <ul class="links">
+    <li><a href="https://a.co/d/4s0iy3q" target="_blank">Black Culture Guide (Urban Edition)</a></li>
+    <li><a href="https://a.co/d/7DBelCu" target="_blank">Global Culture Guide</a></li>
+    <li><a href="https://a.co/d/3lcQLhP" target="_blank">The Little Drummer</a></li>
+  </ul>
+</section>
+
+<!-- CLOTHING -->
+<section id="clothing">
+  <h2>👕 Clothing Line</h2>
+  <ul class="links">
+    <li><a href="https://seebillions.myspreadshop.com/" target="_blank">
+      SeeABillioN / I Luv Me / Tribe Up
+    </a></li>
+  </ul>
+</section>
+
+<!-- APP -->
+<section id="app">
+  <h2>🧠 AlchemyScore App</h2>
+  <ul class="links">
+    <li><a href="https://seeavision.space/" target="_blank">AlchemyScore Project Page</a></li>
+  </ul>
+</section>
+
+<footer>
+  Created by Daniel Mario Brim aka Seea / Daniel Sun © 2026<br>
+  Follow: @elbrimdada @seeabillion
+</footer>
+
+</body>
+</html>
