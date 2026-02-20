@@ -1,586 +1,218 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SeeAVision™ — Cultural Technology</title>
-  <meta name="description" content="SeeAVision™ builds cultural technology tools that help people learn, create, and consume culture consciously." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeeABillion</title>
 
-  <style>
-    :root{
-      --bg0:#050612;
-      --bg1:#070a1a;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.09);
-      --line:rgba(255,255,255,.12);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.58);
-      --glow1:#65f7ff;
-      --glow2:#a855f7;
-      --glow3:#22c55e;
-      --warn:#fbbf24;
-      --bad:#fb7185;
-      --radius:24px;
-      --shadow: 0 20px 80px rgba(0,0,0,.55);
-      --shadow2: 0 12px 40px rgba(0,0,0,.45);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
+<style>
+:root {
+  --neon: #00ffc3;
+  --bg: #000;
+  --panel: #0b0b0b;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(101,247,255,.18), transparent 55%),
-        radial-gradient(900px 600px at 85% 18%, rgba(168,85,247,.18), transparent 58%),
-        radial-gradient(900px 600px at 50% 95%, rgba(34,197,94,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow-x:hidden;
-    }
+* { box-sizing: border-box; }
 
-    /* Ambient animated grid */
-    .grid {
-      position:fixed; inset:-20vh -20vw;
-      background-image:
-        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-      transform: rotate(-6deg);
-      opacity:.22;
-      filter: blur(.2px);
-      pointer-events:none;
-      animation: drift 14s ease-in-out infinite alternate;
-    }
-    @keyframes drift{
-      0%{transform:translate3d(-10px,-10px,0) rotate(-6deg)}
-      100%{transform:translate3d(10px,10px,0) rotate(-6deg)}
-    }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top, #050505, #000);
+  color: #fff;
+  overflow-x: hidden;
+}
 
-    /* Floating orbs */
-    .orb{
-      position:fixed; border-radius:999px;
-      filter: blur(20px);
-      opacity:.35;
-      pointer-events:none;
-      mix-blend-mode: screen;
-      animation: float 10s ease-in-out infinite;
-    }
-    .orb.one{width:380px;height:380px;left:-120px;top:80px;background:rgba(101,247,255,.9)}
-    .orb.two{width:420px;height:420px;right:-160px;top:120px;background:rgba(168,85,247,.9);animation-duration:12s}
-    .orb.three{width:320px;height:320px;left:35%;bottom:-140px;background:rgba(34,197,94,.85);animation-duration:11s}
-    @keyframes float{
-      0%,100%{transform:translate3d(0,0,0)}
-      50%{transform:translate3d(0,-18px,0)}
-    }
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at center, rgba(0,255,195,0.08), transparent 70%),
+    linear-gradient(to bottom, #020202, #000);
+}
 
-    a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 60px}
+.hero-content {
+  max-width: 900px;
+  z-index: 2;
+}
 
-    /* Top bar */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      padding:14px 14px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border-radius:999px;
-      box-shadow: var(--shadow2);
-      backdrop-filter: blur(14px);
-      position:sticky; top:12px; z-index:10;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; min-width:0;
-    }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(101,247,255,.85), transparent 45%),
-        radial-gradient(circle at 75% 35%, rgba(168,85,247,.85), transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(34,197,94,.65), transparent 50%),
-        rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow: 0 0 24px rgba(101,247,255,.18), 0 0 24px rgba(168,85,247,.14);
-    }
-    .brand h1{
-      font-size:14px; margin:0; letter-spacing:.14em; text-transform:uppercase;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .pill{
-      font-family:var(--mono);
-      font-size:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-    }
-    .actions{display:flex; gap:10px; align-items:center}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:600;
-      font-size:13px;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-    }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.26)}
-    .btn.primary{
-      border-color: rgba(101,247,255,.35);
-      background: linear-gradient(90deg, rgba(101,247,255,.18), rgba(168,85,247,.16));
-      box-shadow: 0 0 26px rgba(101,247,255,.12);
-    }
+#hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
 
-    /* Hero */
-    .hero{padding:34px 6px 18px}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .heroGrid{grid-template-columns:1fr}
-    }
-    .panel{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-      overflow:hidden;
-      position:relative;
-    }
-    .panel::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(700px 220px at 20% 0%, rgba(101,247,255,.22), transparent 55%),
-                  radial-gradient(700px 240px at 90% 20%, rgba(168,85,247,.18), transparent 60%);
-      opacity:.9; pointer-events:none;
-    }
-    .panelInner{position:relative; padding:26px}
-    .kicker{
-      font-family:var(--mono);
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--muted);
-      display:flex; align-items:center; gap:10px;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, var(--glow1), rgba(255,255,255,.2));
-      box-shadow: 0 0 18px rgba(101,247,255,.35);
-    }
-    .headline{
-      margin:10px 0 10px;
-      font-size:44px;
-      line-height:1.05;
-      letter-spacing:-.02em;
-    }
-    @media (max-width: 420px){
-      .headline{font-size:36px}
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
-      max-width:62ch;
-    }
-    .heroCtas{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-    .mini{
-      margin-top:18px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      color:var(--muted2);
-      font-size:13px;
-    }
-    .mini span{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      padding:8px 10px;
-      border-radius:999px;
-      font-family:var(--mono);
-    }
+#hero p {
+  font-size: 1.25rem;
+  margin-top: 20px;
+  line-height: 1.7;
+  color: #e6e6e6;
+}
 
-    /* Right card: “System Modules” */
-    .modulesHeader{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      margin-bottom:12px;
-    }
-    .modulesHeader h3{margin:0; font-size:16px; letter-spacing:.06em; text-transform:uppercase}
-    .modulesHeader p{margin:0; color:var(--muted); font-size:13px; line-height:1.5; max-width:34ch}
+#hero a {
+  margin-top: 35px;
+  display: inline-block;
+  padding: 14px 30px;
+  font-size: 1rem;
+  background: var(--neon);
+  color: #000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 25px rgba(0,255,195,0.4);
+}
 
-    .moduleList{display:grid; gap:10px}
-    .module{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:12px 12px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-    }
-    .icon{
-      width:34px;height:34px;border-radius:14px;
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.05);
-      font-size:16px;
-    }
-    .module h4{margin:0; font-size:14px}
-    .module p{margin:4px 0 0; color:var(--muted); font-size:13px; line-height:1.45}
+/* ===== ENERGY PYRAMID ===== */
+.pyramid {
+  position: absolute;
+  bottom: 5%;
+  width: 260px;
+  height: 230px;
+  opacity: 0.85;
+}
 
-    /* Section */
-    .section{margin-top:18px}
-    .sectionTitle{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin:22px 6px 10px;
-    }
-    .sectionTitle h2{
-      margin:0; font-size:16px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.86);
-    }
-    .sectionTitle .line{
-      height:1px; flex:1;
-      background:linear-gradient(90deg, rgba(255,255,255,.14), transparent);
-    }
+.pyramid svg {
+  width: 100%;
+  height: 100%;
+}
 
-    /* Product cards */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      padding:0 6px;
-    }
-    @media (max-width: 900px){ .cards{grid-template-columns:1fr} }
-    .card{
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow2);
-      backdrop-filter: blur(14px);
-      overflow:hidden;
-      position:relative;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(520px 160px at 20% -10%, rgba(101,247,255,.18), transparent 55%),
-                  radial-gradient(520px 180px at 100% 0%, rgba(168,85,247,.14), transparent 60%);
-      opacity:.9; pointer-events:none;
-    }
-    .cardInner{position:relative; padding:18px}
-    .tagRow{display:flex; justify-content:space-between; align-items:center; gap:10px}
-    .tag{
-      font-family:var(--mono);
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.12);
-      color:var(--muted);
-    }
-    .card h3{margin:12px 0 8px; font-size:18px}
-    .card p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
-    .bullets{margin:12px 0 0; padding-left:18px; color:var(--muted2); font-size:13px}
-    .bullets li{margin:6px 0}
+.apex {
+  animation: glow 3s infinite ease-in-out;
+}
 
-    /* Funding */
-    .funding{
-      padding:0 6px;
-    }
-    .fundGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    @media (max-width:900px){ .fundGrid{grid-template-columns:1fr} }
-    .table{
-      width:100%;
-      border-collapse:collapse;
-      overflow:hidden;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-    }
-    .table th,.table td{
-      padding:12px 12px;
-      text-align:left;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      font-size:13px;
-      color:rgba(255,255,255,.86);
-    }
-    .table th{
-      font-family:var(--mono);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.78);
-      background:rgba(255,255,255,.04);
-    }
-    .table td:last-child{color:var(--muted)}
-    .foot{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
-      padding:18px 6px 0;
-      color:var(--muted2);
-      font-size:13px;
-    }
-    .foot a{color:rgba(101,247,255,.9); text-decoration:none}
-    .foot a:hover{text-decoration:underline}
+@keyframes glow {
+  0%,100% { filter: drop-shadow(0 0 10px var(--neon)); }
+  50% { filter: drop-shadow(0 0 30px var(--neon)); }
+}
 
-    /* Footer */
-    footer{
-      margin-top:26px;
-      padding:20px 6px 0;
-      color:var(--muted2);
-      font-size:12px;
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
-    }
-  </style>
+/* ===== SECTIONS ===== */
+section {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section:not(#hero) {
+  background: linear-gradient(to bottom, transparent, var(--panel), transparent);
+}
+
+h2 {
+  font-size: 2.1rem;
+  margin-bottom: 20px;
+}
+
+ul.links {
+  list-style: none;
+  padding: 0;
+}
+
+ul.links li {
+  margin-bottom: 12px;
+}
+
+ul.links a {
+  color: var(--neon);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  background: #050505;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+</style>
 </head>
 
 <body>
-  <div class="grid"></div>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
 
-  <div class="wrap">
-
-    <div class="topbar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div style="min-width:0">
-          <h1>SeeAVision™</h1>
-          <div class="pill">Cultural Technology • Conscious Media Tools</div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <a class="btn" href="#products">Projects</a>
-        <a class="btn" href="#funding">Funding</a>
-        <a class="btn primary" href="https://alchemyscore.onrender.com/" target="_blank" rel="noreferrer">Live Demo →</a>
-      </div>
-    </div>
-
-    <section class="hero">
-      <div class="heroGrid">
-
-        <div class="panel">
-          <div class="panelInner">
-            <div class="kicker"><span class="dot"></span>Welcome to SeeAVision™</div>
-            <h2 class="headline">Cultural tech for the next generation.</h2>
-            <p class="sub">
-              SeeAVision™ builds tools that help people <b>learn</b>, <b>create</b>, and <b>consume culture consciously</b>.
-              Our mission: protect the mind, uplift creativity, and evolve how society engages with media and education.
-            </p>
-
-            <div class="heroCtas">
-              <a class="btn primary" href="#funding">Partner / Invest</a>
-              <a class="btn" href="#products">Explore Modules</a>
-              <a class="btn" href="mailto:contact@seeavision.net">contact@seeavision.net</a>
-            </div>
-
-            <div class="mini">
-              <span>Truth Layer</span>
-              <span>Behavior + Culture</span>
-              <span>AI-Enhanced Context</span>
-              <span>Education Ready</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panelInner">
-            <div class="modulesHeader">
-              <div>
-                <h3>System Modules</h3>
-                <p>Tools that convert raw media into usable insight—without censorship.</p>
-              </div>
-              <div class="pill">v0.9 Demo</div>
-            </div>
-
-            <div class="moduleList">
-              <div class="module">
-                <div class="icon">🎶</div>
-                <div>
-                  <h4>AlchemyScore™</h4>
-                  <p>A “nutrition label” for music: what to take in, what to discard, and how to apply the message.</p>
-                </div>
-              </div>
-
-              <div class="module">
-                <div class="icon">🎮</div>
-                <div>
-                  <h4>Team Builder Game</h4>
-                  <p>Educational match game teaching teamwork, entrepreneurship, roles, and archetypes.</p>
-                </div>
-              </div>
-
-              <div class="module">
-                <div class="icon">🎤</div>
-                <div>
-                  <h4>FlowState</h4>
-                  <p>Transforms raw freestyles into cohesive songs by detecting patterns and generating hooks.</p>
-                </div>
-              </div>
-
-              <div class="module">
-                <div class="icon">🧠</div>
-                <div>
-                  <h4>RECODE Mode</h4>
-                  <p>Upgrades harmful or unwise logic while preserving cadence—remixer or serious mindset upgrader.</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="sectionTitle" id="products">
-      <h2>Projects</h2><div class="line"></div>
-    </div>
-
-    <section class="cards">
-      <article class="card">
-        <div class="cardInner">
-          <div class="tagRow">
-            <span class="tag">AlchemyScore™</span>
-            <span class="tag">Music Intelligence</span>
-          </div>
-          <h3>The “Nutrition Label” for Music</h3>
-          <p>
-            Helps listeners digest lyrics safely: highlights uplifting codes, flags harmful patterns, and gives an action strategy.
-          </p>
-          <ul class="bullets">
-            <li>9-category scoring (Lyricism, Flow, Substance, Blueprint, etc.)</li>
-            <li>Lyric Upload + Compare Mode</li>
-            <li>Context without censorship</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="cardInner">
-          <div class="tagRow">
-            <span class="tag">Team Builder</span>
-            <span class="tag">Education</span>
-          </div>
-          <h3>Entrepreneurship Through Play</h3>
-          <p>
-            A classroom-ready match game that teaches teamwork and profitable company-building by aligning roles and archetypes.
-          </p>
-          <ul class="bullets">
-            <li>Role alignment + strategy thinking</li>
-            <li>Youth-friendly, teacher-friendly</li>
-            <li>Future: curricula + dashboards</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="cardInner">
-          <div class="tagRow">
-            <span class="tag">FlowState</span>
-            <span class="tag">Creator Tools</span>
-          </div>
-          <h3>From Freestyle to Finished Song</h3>
-          <p>
-            Detects flow patterns, strengthens structure, and helps generate hooks—turning raw bars into complete records.
-          </p>
-          <ul class="bullets">
-            <li>Pattern recognition in cadence</li>
-            <li>Hook + structure generator</li>
-            <li>Future: stem + session workflow</li>
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <div class="sectionTitle" id="funding">
-      <h2>Funding</h2><div class="line"></div>
-    </div>
-
-    <section class="funding">
-      <div class="fundGrid">
-
-        <div class="panel">
-          <div class="panelInner">
-            <div class="kicker"><span class="dot"></span>Seed Raise</div>
-            <h2 style="margin:10px 0 8px; font-size:28px; letter-spacing:-.02em;">$500,000 Seed Round</h2>
-            <p class="sub" style="font-size:15px">
-              This raise supports full-scale development, mobile optimization, indie artist integration, and a strong cultural rollout.
-              Equity negotiable based on alignment and contribution.
-            </p>
-            <div class="heroCtas" style="margin-top:16px">
-              <a class="btn primary" href="mailto:contact@seeavision.net?subject=SeeAVision%20Seed%20Round%20Inquiry">Email for Deck →</a>
-              <a class="btn" href="https://alchemyscore.onrender.com/" target="_blank" rel="noreferrer">Demo Link</a>
-            </div>
-
-            <div class="mini" style="margin-top:14px">
-              <span>Prototype Live</span>
-              <span>Market Timing</span>
-              <span>AI + Culture Convergence</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panelInner">
-            <h3 style="margin:0 0 10px; font-size:16px; letter-spacing:.12em; text-transform:uppercase;">Use of Funds</h3>
-
-            <table class="table" role="table" aria-label="Budget Table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Budget</th>
-                  <th>Purpose</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Product Architecture & Development</td><td>$150,000</td><td>Full-stack build, scoring logic, indie portal</td></tr>
-                <tr><td>Creative & Operational Leadership</td><td>$125,000</td><td>Strategy, branding, product flow</td></tr>
-                <tr><td>Marketing & Launch Campaign</td><td>$75,000</td><td>Reels, influencer push, platform trailers</td></tr>
-                <tr><td>UX/UI + Visual Design</td><td>$35,000</td><td>App store–ready interface</td></tr>
-                <tr><td>AI/API Infrastructure</td><td>$25,000</td><td>OpenAI, Genius, NLP scoring</td></tr>
-                <tr><td>Legal + IP Protection</td><td>$15,000</td><td>Trademark, terms, privacy</td></tr>
-                <tr><td>Operations & Team Support</td><td>$20,000</td><td>Coordination, admin</td></tr>
-                <tr><td>Indie Submission System</td><td>$30,000</td><td>Artist dashboard + rating interface</td></tr>
-                <tr><td>Distribution & Travel</td><td>$20,000</td><td>Label convos, live pitches</td></tr>
-                <tr><td>Emergency + Flex Buffer</td><td>$20,000</td><td>Growth pivots</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="foot">
-        <div>
-          <b>Big Claim:</b> If every album shipped with an AlchemyScore™, music becomes safer and more constructive—without censorship.
-        </div>
-        <div>
-          Questions / partnerships: <a href="mailto:contact@seeavision.net">contact@seeavision.net</a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div>© <span id="y"></span> SeeAVision™ • Cultural Technology</div>
-      <div class="pill">Built for: education • creativity • conscious consumption</div>
-    </footer>
-
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <h1>Chicago Didn’t Collapse. It Evolved.</h1>
+    <p>
+      The city morphed into a harmonic system — powered by a central energy pyramid.<br><br>
+      At the apex: a living triangle, drawing from the sun and the charged atmosphere itself.<br><br>
+      Energy is no longer extracted. It is tuned.<br>
+      Sound. Movement. Culture. Intention.<br><br>
+      This is <strong>SeeABillion</strong>.
+    </p>
+    <a href="#music">Enter the System</a>
   </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <!-- ENERGY PYRAMID -->
+  <div class="pyramid">
+    <svg viewBox="0 0 200 180">
+      <polygon points="100,10 10,170 190,170"
+        fill="none"
+        stroke="#00ffc3"
+        stroke-width="2"/>
+      <circle class="apex" cx="100" cy="12" r="6" fill="#00ffc3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- LORE -->
+<section id="lore">
+  <h2>🌀 The Lore of SeeABillion</h2>
+  <p>
+    SeeABillion is a philosophy, a vision, and a way of seeing the hidden wealth in people and situations others overlook.
+    It recognizes value in the quiet artist, the misunderstood genius, and the unseen architect.
+    <br><br>
+    When awareness meets collaboration, overlooked becomes foundational.
+    That’s the SeeABillion way.
+  </p>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <h2>🎵 Music</h2>
+  <ul class="links">
+    <li><a href="https://seeabillionmusic.com" target="_blank">seeabillionmusic.com</a></li>
+  </ul>
+</section>
+
+<!-- BOOKS -->
+<section id="books">
+  <h2>📚 Books by D.M.B</h2>
+  <ul class="links">
+    <li><a href="https://a.co/d/4s0iy3q" target="_blank">Black Culture Guide (Urban Edition)</a></li>
+    <li><a href="https://a.co/d/7DBelCu" target="_blank">Global Culture Guide</a></li>
+    <li><a href="https://a.co/d/3lcQLhP" target="_blank">The Little Drummer</a></li>
+  </ul>
+</section>
+
+<!-- CLOTHING -->
+<section id="clothing">
+  <h2>👕 Clothing Line</h2>
+  <ul class="links">
+    <li><a href="https://seebillions.myspreadshop.com/" target="_blank">
+      SeeABillioN / I Luv Me / Tribe Up
+    </a></li>
+  </ul>
+</section>
+
+<!-- APP -->
+<section id="app">
+  <h2>🧠 AlchemyScore App</h2>
+  <ul class="links">
+    <li><a href="https://seeavision.space/" target="_blank">AlchemyScore Project Page</a></li>
+  </ul>
+</section>
+
+<footer>
+  Created by Daniel Mario Brim aka Seea / Daniel Sun © 2026<br>
+  Follow: @elbrimdada @seeabillion
+</footer>
+
 </body>
 </html>
