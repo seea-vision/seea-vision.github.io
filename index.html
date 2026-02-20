@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SeeABillion</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>See A Billion</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -14,9 +16,10 @@
 
 * { box-sizing: border-box; }
 
-body {
+html, body {
   margin: 0;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: radial-gradient(circle at top, #050505, #000);
   color: #fff;
   overflow-x: hidden;
@@ -31,9 +34,6 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
-  background:
-    radial-gradient(circle at center, rgba(0,255,195,0.08), transparent 70%),
-    linear-gradient(to bottom, #020202, #000);
 }
 
 .hero-content {
@@ -42,43 +42,46 @@ body {
 }
 
 #hero h1 {
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.03em;
 }
 
-#hero p {
-  font-size: 1.25rem;
-  margin-top: 20px;
-  line-height: 1.7;
-  color: #e6e6e6;
+.frequency {
+  margin-top: 24px;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  line-height: 2;
 }
 
-#hero a {
-  margin-top: 35px;
+.cta {
+  margin-top: 36px;
   display: inline-block;
-  padding: 14px 30px;
+  padding: 14px 32px;
   font-size: 1rem;
   background: var(--neon);
   color: #000;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 25px rgba(0,255,195,0.4);
+  font-weight: 700;
+  box-shadow: 0 0 30px rgba(0,255,195,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 45px rgba(0,255,195,0.65);
 }
 
 /* ===== ENERGY PYRAMID ===== */
 .pyramid {
   position: absolute;
-  bottom: 5%;
+  bottom: 6%;
   width: 260px;
   height: 230px;
   opacity: 0.85;
-}
-
-.pyramid svg {
-  width: 100%;
-  height: 100%;
 }
 
 .apex {
@@ -86,15 +89,16 @@ body {
 }
 
 @keyframes glow {
-  0%,100% { filter: drop-shadow(0 0 10px var(--neon)); }
-  50% { filter: drop-shadow(0 0 30px var(--neon)); }
+  0%,100% { filter: drop-shadow(0 0 12px var(--neon)); }
+  50% { filter: drop-shadow(0 0 34px var(--neon)); }
 }
 
 /* ===== SECTIONS ===== */
 section {
-  padding: 80px 20px;
+  padding: 90px 20px;
   max-width: 1000px;
   margin: auto;
+  text-align: center;
 }
 
 section:not(#hero) {
@@ -102,32 +106,46 @@ section:not(#hero) {
 }
 
 h2 {
-  font-size: 2.1rem;
-  margin-bottom: 20px;
+  font-size: 1.9rem;
+  margin-bottom: 26px;
 }
 
 ul.links {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 ul.links li {
-  margin-bottom: 12px;
+  margin: 14px 0;
 }
 
 ul.links a {
   color: var(--neon);
   text-decoration: none;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
+}
+
+ul.links a:hover {
+  text-decoration: underline;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  width: 60%;
+  margin: 80px auto;
+  background: linear-gradient(to right, transparent, var(--neon), transparent);
+  opacity: 0.3;
 }
 
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 50px 20px;
-  background: #050505;
-  font-size: 0.9rem;
+  padding: 60px 20px;
+  background: #040404;
+  font-size: 0.85rem;
   color: #aaa;
 }
 </style>
@@ -138,20 +156,19 @@ footer {
 <!-- HERO -->
 <section id="hero">
   <div class="hero-content">
-    <h1>Chicago Didn’t Collapse. It Evolved.</h1>
-    <p>
-      The city morphed into a harmonic system — powered by a central energy pyramid.<br><br>
-      At the apex: a living triangle, drawing from the sun and the charged atmosphere itself.<br><br>
-      Energy is no longer extracted. It is tuned.<br>
-      Sound. Movement. Culture. Intention.<br><br>
-      This is <strong>SeeABillion</strong>.
+    <h1>See A Billion</h1>
+
+    <p class="frequency">
+      See A Billion is a frequency.<br>
+      A state of mind.<br>
+      A culture.
     </p>
-    <a href="#music">Enter the System</a>
+
+    <a class="cta" href="#alchemy">Enter</a>
   </div>
 
-  <!-- ENERGY PYRAMID -->
   <div class="pyramid">
-    <svg viewBox="0 0 200 180">
+    <svg viewBox="0 0 200 180" width="100%" height="100%">
       <polygon points="100,10 10,170 190,170"
         fill="none"
         stroke="#00ffc3"
@@ -161,57 +178,75 @@ footer {
   </div>
 </section>
 
-<!-- LORE -->
-<section id="lore">
-  <h2>🌀 The Lore of SeeABillion</h2>
-  <p>
-    SeeABillion is a philosophy, a vision, and a way of seeing the hidden wealth in people and situations others overlook.
-    It recognizes value in the quiet artist, the misunderstood genius, and the unseen architect.
-    <br><br>
-    When awareness meets collaboration, overlooked becomes foundational.
-    That’s the SeeABillion way.
-  </p>
+<div class="divider"></div>
+
+<section id="alchemy">
+  <h2>🧠 AlchemyScore</h2>
+  <ul class="links">
+    <li>
+      <a href="https://seeavision.space/" target="_blank" rel="noopener">
+        The AlchemyScore App & Project
+      </a>
+    </li>
+  </ul>
 </section>
 
-<!-- MUSIC -->
+<div class="divider"></div>
+
 <section id="music">
   <h2>🎵 Music</h2>
   <ul class="links">
-    <li><a href="https://seeabillionmusic.com" target="_blank">seeabillionmusic.com</a></li>
+    <li>
+      <a href="https://seeabillionmusic.com" target="_blank" rel="noopener">
+        seeabillionmusic.com
+      </a>
+    </li>
   </ul>
 </section>
 
-<!-- BOOKS -->
+<div class="divider"></div>
+
 <section id="books">
   <h2>📚 Books by D.M.B</h2>
   <ul class="links">
-    <li><a href="https://a.co/d/4s0iy3q" target="_blank">Black Culture Guide (Urban Edition)</a></li>
-    <li><a href="https://a.co/d/7DBelCu" target="_blank">Global Culture Guide</a></li>
-    <li><a href="https://a.co/d/3lcQLhP" target="_blank">The Little Drummer</a></li>
+    <li>
+      <a href="https://a.co/d/5PWc7kN" target="_blank" rel="noopener">
+        The Black Culture Guide — Urban Edition
+      </a>
+    </li>
+    <li>
+      <a href="https://a.co/d/4s0iy3q" target="_blank" rel="noopener">
+        The Black Culture Guide — Original Edition
+      </a>
+    </li>
+    <li>
+      <a href="https://a.co/d/7DBelCu" target="_blank" rel="noopener">
+        Global Culture Guide
+      </a>
+    </li>
+    <li>
+      <a href="https://a.co/d/3lcQLhP" target="_blank" rel="noopener">
+        The Little Drummer
+      </a>
+    </li>
   </ul>
 </section>
 
-<!-- CLOTHING -->
+<div class="divider"></div>
+
 <section id="clothing">
-  <h2>👕 Clothing Line</h2>
+  <h2>👕 Clothing</h2>
   <ul class="links">
-    <li><a href="https://seebillions.myspreadshop.com/" target="_blank">
-      SeeABillioN / I Luv Me / Tribe Up
-    </a></li>
-  </ul>
-</section>
-
-<!-- APP -->
-<section id="app">
-  <h2>🧠 AlchemyScore App</h2>
-  <ul class="links">
-    <li><a href="https://seeavision.space/" target="_blank">AlchemyScore Project Page</a></li>
+    <li>
+      <a href="https://seebillions.myspreadshop.com/" target="_blank" rel="noopener">
+        SeeABillioN / I Luv Me / Tribe Up
+      </a>
+    </li>
   </ul>
 </section>
 
 <footer>
-  Created by Daniel Mario Brim aka Seea / Daniel Sun © 2026<br>
-  Follow: @elbrimdada @seeabillion
+  Created by D.M.B · SeeAVision © 2026
 </footer>
 
 </body>
